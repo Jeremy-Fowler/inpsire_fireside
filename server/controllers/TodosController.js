@@ -6,6 +6,7 @@ export class TodosController extends BaseController {
     super('api/:name/todos')
     this.router
       .get('', this.getAll)
+      // NOTE just because you can name your methods whatever you want, doesn't mean that you should
       .post('', this.monkey)
       .delete('/:todoId', this.remove)
       .put('/:id', this.edit)
