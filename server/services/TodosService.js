@@ -4,10 +4,16 @@ import { Forbidden } from "../utils/Errors"
 class TodosService {
   async edit(body) {
     const todo = await dbContext.Todos.findById(body.id)
-    // NOTE editting booleans is weird in js
+
+    // NOTE check whether the client sent something up, change it to what the client supplied if they did
     todo.completed = body.completed !== null ? body.completed : todo.completed
-    todo.user = body.user || todo.user
+
+    // NOTE only let the client edit what you want them to be able to
+    // todo.user = body.user || todo.user
+
+    // NOTE this can only flip a boolean to true
     // todo.completed = body.completed || todo.completed
+
     await todo.save()
     return todo
   }
